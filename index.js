@@ -374,15 +374,16 @@ const FetchContainer = ({
           ) : (
             <Fragment>
               <Error />
-              {!noRetry && (
-                <Refresher
-                  onRefresh={() => {
-                    setIsFired(true);
-                    setIsInternalLoading(false);
-                    setIsLoading(true);
-                  }}
-                />
-              )}
+              {!noRetry &&
+                (retryComponent || (
+                  <Refresher
+                    onRefresh={() => {
+                      setIsFired(true);
+                      setIsInternalLoading(false);
+                      setIsLoading(true);
+                    }}
+                  />
+                ))}
             </Fragment>
           )
         ) : (
