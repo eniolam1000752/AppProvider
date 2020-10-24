@@ -14,7 +14,7 @@ declare module "app-provider" {
   }
 
   interface IFetchContainerProps<T, G> {
-    children?: React.ReactChild | null;
+    children?: ((resp: Record<string, any>) => React.ReactChild) | null;
     url?: string;
     payload?: T;
     method?: string;
