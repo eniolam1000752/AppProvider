@@ -17,6 +17,7 @@ const FetchConsumer = Consumer;
 
 let isMounteds = {};
 let isActives = {};
+let initAppData = {};
 
 const AppProvider = ({
   children,
@@ -26,7 +27,8 @@ const AppProvider = ({
   initData,
   onLoaded,
 }) => {
-  const { state, dispatch } = useController(initData);
+  initAppData = initData;
+  const { state, dispatch } = useController(initAppData);
 
   const getSaveAs = (saveAs) => {
     const jsonData = JSON.parse(state.saveAsList);

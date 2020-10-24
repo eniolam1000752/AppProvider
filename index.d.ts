@@ -1,12 +1,15 @@
+import { IframeHTMLAttributes } from "react";
 import { RefObject } from "react";
 
 declare module "app-provider" {
-  interface IAppProviderProps<T> {
+  let initAppData: Record<string, any>;
+
+  interface IAppProviderProps {
     children: React.ReactChild;
     baseUrl?: string | null;
     noPersist?: boolean;
     clearCache?: boolean;
-    initData: T;
+    initData: typeof initAppData;
     onLoaded?: (args0: Record<string, any>) => void;
   }
 
@@ -56,11 +59,11 @@ declare module "app-provider" {
     dispatch: React.DispatchWithoutAction;
   }
 
-  let AppProvider: React.FC<IAppProviderProps<Record<string, any>>>;
+  let AppProvider: React.FC<IAppProviderProps>;
   let FetchContainer: React.FC<IFetchContainerProps<
     Record<string, any>,
     Record<string, any>
   >>;
-  let FetchConsumer: React.Consumer<IContextParam>;
-  let AppContext: React.Context<IContextParam>;
+  let FetchConsumer: React.Consumer<typeof initAppData & IContextParam>;
+  let AppContext: React.Context<typeof initAppData & IContextParam>;
 }
