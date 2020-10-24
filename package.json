@@ -1,0 +1,22 @@
+{
+  "name": "app-provider",
+  "version": "1.0.0",
+  "description": "Global state management wrapper that provides a sandboxed environemnt for responsive fetch operations, caching and global state managment",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test"
+  },
+  "keywords": [
+    "responsive-fetch",
+    "caching",
+    "global-state-mangement"
+  ],
+  "author": "eniolam1000752",
+  "license": "ISC",
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
+    "@types/react": "^16.9.53",
+    "@types/react-native": "^0.63.30",
+    "react-native-vector-icons": "^7.1.0"
+  }
+}
