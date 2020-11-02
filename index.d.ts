@@ -21,7 +21,7 @@ declare module "app-provider" {
     headers?: G;
     id?: string;
     saveAs?: string;
-    errorComponent?: React.ReactChild | null;
+    errorComponent?: (arg: any) => React.ReactChild | null;
     retryComponent?: React.ReactChild | null;
     loadingComponent?: React.ReactChild | null;
     defaultComponent?: React.ReactChild | null;
