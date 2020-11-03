@@ -54,8 +54,8 @@ declare module "app-provider" {
     onError: (args: K) => void;
   }
   interface IContextParam {
-    getSaveAs: (args: string) => Record<string, any>;
-    saveAs: (saveAs: string, data: Record<string, any>) => void;
+    getSaveAs: (args: string) => any;
+    saveAs: (saveAs: string, data: any) => void;
     dispatch: React.DispatchWithoutAction;
   }
 
