@@ -56,7 +56,7 @@ declare module "app-provider" {
   interface IContextParam {
     getSaveAs: (args: string) => any;
     saveAs: (saveAs: string, data: any) => void;
-    dispatch: React.DispatchWithoutAction;
+    dispatch: React.Dispatch<Record<string, any>>;
   }
 
   let AppProvider: React.FC<IAppProviderProps>;
