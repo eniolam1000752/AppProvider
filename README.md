@@ -19,13 +19,15 @@ Just as context api provides the ***Provider/Consumer*** scenario, app-provider 
 example (as a provider)
 
 ```jsx
-    import {AppProvier} from 'app-provider'
-
-    const initAppData = {state1: 1} // this is the initValue just as the value provided to a Context.Provider
+    import {AppProvier} from 'app-provider';
+    
+    // this is the initValue just as the value provided to a Context.Provider
+    const initAppData = {state1: 1}; 
     
     <AppProvider  initData={initAppData}>
-	<RootComponent />
+		<RootComponent />
     </AppProvider>
+    
    ```
 
 example (as a consumer)
@@ -40,7 +42,7 @@ example (as a consumer)
 
 	       //...component here
 
-	    )
+	    )}
     </FetchConsumer
 ```
 
@@ -50,20 +52,20 @@ Persistence is powered by AsyncStorage, getters/getSaveAs and setter/saveAs func
 example 
 
 ```jsx
-    import React, {useContext} from 'react'
-    import {AppContext} from 'app-provider'
+    import React, {useContext} from 'react';
+    import {AppContext} from 'app-provider';
 
     useCustomeHook(){
       const {getSaveAs, saveAs} = useContext(AppContext)
       
       // a function that would save a value 
-       const saveMyValue = ()=>{
-          saveAs('save_as_name', 'value')
+       const saveMyValue = () => {
+          saveAs('save_as_name', 'value');
        }
        
        // a function that would get a value from async storage
-       const getMyValue = ()=>{
-          const value = getSaveAs('save_as_name')
+       const getMyValue = () => {
+          const value = getSaveAs('save_as_name');
        }
     }
    ```
@@ -85,7 +87,7 @@ example
 	       <View>
 	         <FetchContainer
 	            url = {url}
-		        fire={fetchData}
+				fire={fetchData}
 				saveAs="mydata"
 				defaultComponent={<Text> i will show if request is not fired </Text>}
 				loadingComponent={
@@ -95,18 +97,18 @@ example
 					<Text  style={{alignSelf:  'center'}}>{err}</_Text>
 				)}
 				successCallback={(resp)  =>  {
-				   // callback is fired when the operation is successful
+				  // callback is fired when the operation is successful
 				}}
 				errorCallback = {(err)=>{
 					// callback is fird when the operation failes
 				}}>	
 					{
 						(resp)  => (
-						       // compoennt to render based on the resp from API call made.
+							// compoennt to render based on the resp from API call made.
 						)
 					}
-			  </FetchContainer>
-			</View>
+		 	</FetchContainer>
+		</View>
 ```
 
 ## Props
