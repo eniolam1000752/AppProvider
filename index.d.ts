@@ -21,7 +21,6 @@ declare module "app-provider" {
     headers?: G;
     id?: string;
     saveAs?: string;
-    errorComponent?: (arg: any) => React.ReactChild | null;
     retryComponent?: React.ReactChild | null;
     loadingComponent?: React.ReactChild | null;
     defaultComponent?: React.ReactChild | null;
@@ -29,6 +28,7 @@ declare module "app-provider" {
     noLoading?: boolean | null;
     noCache?: boolean | null;
     noRetry?: boolean | null;
+    errorComponent?: (arg: any) => React.ReactChild | null;
     successCallback?: (args: Record<string, any>) => void;
     errorCallback?: (args: Record<string, any> | string) => void;
     completCallback?: () => void;
@@ -60,10 +60,9 @@ declare module "app-provider" {
   }
 
   let AppProvider: React.FC<IAppProviderProps>;
-  let FetchContainer: React.FC<IFetchContainerProps<
-    Record<string, any>,
-    Record<string, any>
-  >>;
+  let FetchContainer: React.FC<
+    IFetchContainerProps<Record<string, any>, Record<string, any>>
+  >;
   let FetchConsumer: React.Consumer<typeof initAppData & IContextParam>;
   let AppContext: React.Context<typeof initAppData & IContextParam>;
 }
