@@ -87,28 +87,29 @@ example
 	       <View>
 	         <FetchContainer
 	            url = {url}
-				fire={fetchData}
-				saveAs="mydata"
-				defaultComponent={<Text> i will show if request is not fired </Text>}
-				loadingComponent={
-					<Text> i would show when request has been fired and is processing </Text>
-				}
-				errorComponent={(err)  => (
-					<Text  style={{alignSelf:  'center'}}>{err}</_Text>
-				)}
-				successCallback={(resp)  =>  {
-				  // callback is fired when the operation is successful
-				}}
-				errorCallback = {(err)=>{
-					// callback is fird when the operation failes
-				}}>	
-					{
-						(resp)  => (
-							// compoennt to render based on the resp from API call made.
-						)
-					}
-		 	</FetchContainer>
-		</View>
+		    fire={fetchData}
+		    saveAs="mydata"
+		    defaultComponent={<Text> i will show if request is not fired </Text>}
+		    loadingComponent={
+		    	<Text> i would show when request has been fired and is processing </Text>
+		    }
+		    errorComponent={(err)  => (
+			<Text  style={{alignSelf:  'center'}}>{err}</_Text>
+		    )}
+		    successCallback={(resp)  =>  {
+			// callback is fired when the operation is successful
+		    }}
+		    errorCallback = {(err)=>{
+			// callback is fird when the operation failes
+		    }}>	
+			{
+				(resp)  => (
+					// compoennt to render based on the resp from API call made.
+				)
+			}
+		</FetchContainer>
+	      </View>)
+ 	}
 ```
 
 ## Props
