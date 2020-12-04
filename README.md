@@ -43,7 +43,7 @@ example (as a consumer)
 	       //...component here
 
 	    )}
-    </FetchConsumer
+    </FetchConsumer>
 ```
 
 #### Persistence
