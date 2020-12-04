@@ -1,5 +1,5 @@
 # App-provider
-A global state management wrapper sitting on react's context api providing out of box Persistence, responsive ui that are data driven from remote sources and your favourite global state management provided by context api.
+A global state management wrapper sitting on react's context api providing out of box Persistence, responsive ui that are data driven from remote sources and your favourite global state management provided by context api. As for now, it only available for react-native.
 
 ## Installation
 
@@ -21,10 +21,10 @@ example (as a provider)
 ```jsx
     import {AppProvier} from 'app-provider'
 
-    const initAppData = {state1: 1'} // this is the initValue just as the value provided to a Context.Provider
+    const initAppData = {state1: 1} // this is the initValue just as the value provided to a Context.Provider
     
     <AppProvider  initData={initAppData}>
-	    <RootComponent />
+	<RootComponent />
     </AppProvider>
    ```
 
@@ -34,14 +34,14 @@ example (as a consumer)
     
     
     // dispatch is used to set and update global state values
-    // component in which this is used whould be wrapped under 																						AppProvider just as the case scenario of the Provider/Consumer relationship
+    // component in which this is used whould be wrapped under 												
     <FetchConsumer>
 	    {({state1, dispatch})  => (
-	    
+
 	       //...component here
-	       
+
 	    )
-	</FetchConsumer
+    </FetchConsumer
 ```
 
 #### Persistence
@@ -111,7 +111,7 @@ example
 
 ## Props
 #### FetchContainer
-- url **:** url to the path to be hit if not baseUrl is. provided on AppProvider then 		this is an absolute path else its just a path
+- url **:** url to the path to be hit if not baseUrl is. provided on AppProvider then this is an absolute path else its just a path
 
 - payload **:**  payload for the request
 
