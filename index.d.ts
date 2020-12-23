@@ -63,6 +63,14 @@ declare module "app-provider" {
   let FetchContainer: React.FC<
     IFetchContainerProps<Record<string, any>, Record<string, any>>
   >;
-  let FetchConsumer: React.Consumer<typeof initAppData & IContextParam>;
-  let AppContext: React.Context<typeof initAppData & IContextParam>;
+  const FetchConsumer: React.Consumer<typeof initAppData & IContextParam>;
+  const AppContext: React.Context<typeof initAppData & IContextParam>;
+  const getSaveAs: (
+    saveAs: string
+  ) => Promise<Record<string, any> | boolean | string | number | null>;
+
+  const setSaveAs: (
+    saveAs: string,
+    data: Record<string, any> | boolean | string | number | null
+  ) => void;
 }

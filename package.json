@@ -1,5 +1,6 @@
 {
   "name": "app-provider",
+  "repository": "eniolam1000752/AppProvider",
   "version": "1.0.0",
   "description": "Global state management wrapper that provides a sandboxed environemnt for responsive fetch operations, caching and global state managment",
   "main": "index.js",
@@ -18,5 +19,14 @@
     "@types/react": "^16.9.53",
     "@types/react-native": "^0.63.30",
     "react-native-vector-icons": "^7.1.0"
-  }
+  },
+  "keywords": [
+    "react-native",
+    "context API",
+    "fetchContainer",
+    "AppProvider",
+    "Consumer",
+    "Provider",
+    "fetchConsumer"
+  ]
 }

@@ -4,20 +4,39 @@ import IconMC from "react-native-vector-icons/MaterialCommunityIcons.js";
 import AsyncStorage from "@react-native-community/async-storage";
 
 import { useController } from "./hook";
-// import LocalStorage from './LocalStorage';
 
 const AppContext = React.createContext({
   getSaveAs: () => {},
   saveAs: () => {},
   dispatch: () => {},
 });
+
 const { Provider, Consumer } = AppContext;
 const FetchConsumer = Consumer;
-// let localStorage = new LocalStorage();
 
 let isMounteds = {};
 let isActives = {};
 let initAppData = {};
+
+const getSaveAs = async (saveAs) => {
+  try {
+    const outputData = await AsyncStorage.getItem("saveAsList");
+    return JSON.parse(outputData || "{}")[saveAs];
+  } catch (exp) {
+    throw new Error(exp);
+  }
+};
+
+const setSaveAs = async (saveAs, data) => {
+  try {
+    const outputData = await AsyncStorage.getItem("saveAsList");
+    const saveAsList = JSON.parse(outputData || "{}");
+    saveAsList[saveAs] = data;
+    await AsyncStorage.setItem("saveAsList", JSON.stringify(saveAsList));
+  } catch (exp) {
+    throw new Error(exp);
+  }
+};
 
 const AppProvider = ({
   children,
@@ -36,7 +55,6 @@ const AppProvider = ({
   };
 
   const saveAs = (saveAs, data) => {
-    // localStorage.put({saveAsList: JSON.stringify(saveAsList)});
     AsyncStorage.getItem("saveAsList")
       .then((resp) => {
         const saveAsList = JSON.parse(resp || "{}");
@@ -187,9 +205,7 @@ const FetchContainer = ({
   }, [dispatch, genId, id]);
 
   useEffect(() => {
-    // console.log('mounted fetch containers: ', mounters);
     const onSuccess = (resp) => {
-      // console.log('chekcing save as name: ', saveAs, isActives[genId]);
       if (isMounteds[genId] /* && saveAs === isActives[genId] */) {
         setIsFired(false);
         successCallback ? successCallback(resp) : null;
@@ -207,13 +223,8 @@ const FetchContainer = ({
         dispatch({
           saveAsList: TempSaveAsList,
         });
-        // console.log(!noCache && shouldPersist);
 
         if (!noCache && shouldPersist) {
-          // localStorage.put({saveAsList: TempSaveAsList}).then((resp) => {
-          //   // console.log('saved: ', resp);
-          // });
-
           AsyncStorage.setItem("saveAsList", TempSaveAsList)
             .then(() =>
               console.log(
@@ -225,12 +236,9 @@ const FetchContainer = ({
               console.log("%cerror puting data in async store ", "red")
             );
         }
-        // console.log('save as list object:', TempSaveAsList);
       }
     };
     const onError = (err) => {
-      // console.log('mounted fetch containers: ', isMounteds);
-      // console.log('chekcing save as name: ', saveAs, isActives[genId], genId);
       if (isMounteds[genId] /* && saveAs === isActives[genId] */) {
         setIsFired(false);
         errorCallback ? errorCallback(err) : null;
@@ -244,9 +252,6 @@ const FetchContainer = ({
 
     if (isFired && !isInternalLoad) {
       setIsInternalLoading(true);
-      // console.log('is mounted: ', isMounteds);
-      // console.log('fetch params: ', baseUrl, url);
-      // console.log('cached data: ', saveAsList);
       if (fetchFunction || fetchFunctions) {
         if (fetchFunctions) {
           let response = {
@@ -445,4 +450,11 @@ function Refresher({ onRefresh }) {
   );
 }
 
-export { AppProvider, FetchContainer, FetchConsumer, AppContext };
+export {
+  AppProvider,
+  FetchContainer,
+  FetchConsumer,
+  AppContext,
+  getSaveAs,
+  setSaveAs,
+};
