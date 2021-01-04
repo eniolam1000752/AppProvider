@@ -31,7 +31,11 @@ const setSaveAs = async (saveAs, data) => {
   try {
     const outputData = await AsyncStorage.getItem("saveAsList");
     const saveAsList = JSON.parse(outputData || "{}");
-    saveAsList[saveAs] = data;
+    if (typeof saveAs === "object") {
+      saveAsList = { ...saveAsList, ...saveAs };
+    } else {
+      saveAsList[saveAs] = data;
+    }
     await AsyncStorage.setItem("saveAsList", JSON.stringify(saveAsList));
   } catch (exp) {
     throw new Error(exp);
@@ -54,18 +58,37 @@ const AppProvider = ({
     return jsonData ? jsonData[saveAs] : {};
   };
 
-  const saveAs = (saveAs, data) => {
-    AsyncStorage.getItem("saveAsList")
-      .then((resp) => {
-        const saveAsList = JSON.parse(resp || "{}");
-        saveAsList[saveAs] = data;
-        const stringedSaveAsList = JSON.stringify(saveAsList);
+  const saveAs = async (saveAs, data) => {
+    try {
+      const resp = await AsyncStorage.getItem("saveAsList");
 
-        AsyncStorage.setItem("saveAsList", stringedSaveAsList)
-          .then(() => dispatch({ saveAsList: stringedSaveAsList }))
-          .catch(() => console.log("data not saved (._.)"));
-      })
-      .catch((err) => console.log(err));
+      const saveAsList = JSON.parse(resp || "{}");
+      if (typeof saveAs === "object") {
+        saveAsList = { ...saveAsList, ...saveAs };
+      } else {
+        saveAsList[saveAs] = data;
+      }
+      const stringedSaveAsList = JSON.stringify(saveAsList);
+
+      await AsyncStorage.setItem("saveAsList", stringedSaveAsList);
+      dispatch({ saveAsList: stringedSaveAsList });
+    } catch (exp) {
+      throw new Error(exp);
+    }
+
+    // .then(() => )
+    // .catch(() => console.log("data not saved (._.)"));
+
+    // .then((resp) => {
+    //   const saveAsList = JSON.parse(resp || "{}");
+    //   saveAsList[saveAs] = data;
+    //   const stringedSaveAsList = JSON.stringify(saveAsList);
+
+    //   AsyncStorage.setItem("saveAsList", stringedSaveAsList)
+    //     .then(() => dispatch({ saveAsList: stringedSaveAsList }))
+    //     .catch(() => console.log("data not saved (._.)"));
+    // })
+    // .catch((err) => console.log(err));
   };
 
   useEffect(() => {

@@ -55,12 +55,15 @@ declare module "app-provider" {
   }
   interface IContextParam {
     getSaveAs: (args: string) => any;
-    saveAs: (saveAs: string, data: any) => void;
+    saveAs: (
+      saveAs: string | Record<string, any>,
+      data?: Record<string, any> | boolean | string | number | null
+    ) => Promise<void>;
     dispatch: React.Dispatch<Record<string, any>>;
   }
 
-  let AppProvider: React.FC<IAppProviderProps>;
-  let FetchContainer: React.FC<
+  const AppProvider: React.FC<IAppProviderProps>;
+  const FetchContainer: React.FC<
     IFetchContainerProps<Record<string, any>, Record<string, any>>
   >;
   const FetchConsumer: React.Consumer<typeof initAppData & IContextParam>;
@@ -70,7 +73,7 @@ declare module "app-provider" {
   ) => Promise<Record<string, any> | boolean | string | number | null>;
 
   const setSaveAs: (
-    saveAs: string,
-    data: Record<string, any> | boolean | string | number | null
-  ) => void;
+    saveAs: string | Record<string, any>,
+    data?: Record<string, any> | boolean | string | number | null
+  ) => Promise<void>;
 }
