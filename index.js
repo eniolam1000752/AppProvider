@@ -30,7 +30,7 @@ const getSaveAs = async (saveAs) => {
 const setSaveAs = async (saveAs, data) => {
   try {
     const outputData = await AsyncStorage.getItem("saveAsList");
-    const saveAsList = JSON.parse(outputData || "{}");
+    let saveAsList = JSON.parse(outputData || "{}");
     if (typeof saveAs === "object") {
       saveAsList = { ...saveAsList, ...saveAs };
     } else {
