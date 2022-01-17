@@ -63,6 +63,7 @@ declare module "app-provider" {
   }
 
   const AppProvider: React.FC<IAppProviderProps>;
+  const AppProviderWeb: React.FC<IAppProviderProps>;
   const FetchContainer: React.FC<
     IFetchContainerProps<Record<string, any>, Record<string, any>>
   >;

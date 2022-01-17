@@ -62,7 +62,7 @@ const AppProvider = ({
     try {
       const resp = await AsyncStorage.getItem("saveAsList");
 
-      const saveAsList = JSON.parse(resp || "{}");
+      let saveAsList = JSON.parse(resp || "{}");
       if (typeof saveAs === "object") {
         saveAsList = { ...saveAsList, ...saveAs };
       } else {
@@ -71,7 +71,7 @@ const AppProvider = ({
       const stringedSaveAsList = JSON.stringify(saveAsList);
 
       await AsyncStorage.setItem("saveAsList", stringedSaveAsList);
-      dispatch({ saveAsList: stringedSaveAsList });
+      await dispatch({ saveAsList: stringedSaveAsList });
     } catch (exp) {
       throw new Error(exp);
     }
